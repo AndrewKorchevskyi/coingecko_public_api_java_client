@@ -1,16 +1,18 @@
-package com.coingecko.client.retrofit;
+package com.coingecko.client.util.retrofit;
 
-import com.coingecko.client.util.Config;
+import com.coingecko.client.util.config.ConfigLoader;
+import lombok.experimental.UtilityClass;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@UtilityClass
 public class RetrofitClient {
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Config.get("base_url"))
+                    .baseUrl(ConfigLoader.get("base_url"))
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

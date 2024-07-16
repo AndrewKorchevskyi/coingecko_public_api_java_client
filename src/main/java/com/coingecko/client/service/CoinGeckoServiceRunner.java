@@ -1,13 +1,15 @@
 package com.coingecko.client.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@RequiredArgsConstructor
 public class CoinGeckoServiceRunner {
-    private final CoinGeckoServiceImpl coinGeckoService;
+    private final CoinGeckoService coinGeckoService;
 
     public CoinGeckoServiceRunner() {
-        coinGeckoService = new CoinGeckoServiceImpl();
+        coinGeckoService = new CoinGeckoService();
     }
 
     public void executePing() {
