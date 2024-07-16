@@ -1,0 +1,54 @@
+# Maven
+target/
+*.log
+*.class
+
+# Eclipse
+.project
+.classpath
+.settings/
+*.launch
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+.nb-gradle/
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# OS-specific
+*.swp
+*.swo
+*.swn
+*.swo
+
+# Environment Files
+.env
+*.env
+
+# Gradle
+.gradle/
+
+# JAR Files
+*.jar
+*.war
+*.ear
