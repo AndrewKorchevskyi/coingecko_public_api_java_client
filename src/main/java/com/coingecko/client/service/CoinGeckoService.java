@@ -2,26 +2,38 @@ package com.coingecko.client.service;
 
 import com.coingecko.client.model.GetCoinResponse;
 import com.coingecko.client.model.PingResponse;
+import com.coingecko.client.util.retrofit.RetrofitClient;
+import com.coingecko.client.util.config.ConfigLoader;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Query;
+import retrofit2.Retrofit;
 
+import java.io.IOException;
 import java.util.Map;
 
-public interface CoinGeckoService {
-    @GET("ping")
-    Call<PingResponse> ping(@Header("x_cg_demo_api_key") String apiKey);
+@Slf4j
+public class CoinGeckoService {
+    private final CoinGeckoApiClient coinGeckoApiClient;
+    private final String apiKey;
 
-    @GET("simple/price")
-    Call<Map<String, GetCoinResponse.CoinData>> getCoinDetails(
-            @Header("x-cg-demo-api-key") String apiKey,
-            @Query("ids") String ids,
-            @Query("vs_currencies") String vsCurrencies,
-            @Query("include_market_cap") Boolean includeMarketCap,
-            @Query("include_24hr_vol") Boolean include24hrVol,
-            @Query("include_24hr_change") Boolean include24hrChange,
-            @Query("include_last_updated_at") Boolean includeLastUpdatedAt,
-            @Query("precision") String precision
-    );
+    public CoinGeckoService() {
+        Retrofit retrofit = RetrofitClient.getClient();
+        coinGeckoApiClient = retrofit.create(CoinGeckoApiClient.class);
+        this.apiKey = ConfigLoader.get("api_key");
+    }
+
+    @SneakyThrows(IOException.class)
+    public void ping() {
+        Call<PingResponse> call = coinGeckoApiClient.ping(apiKey);
+        var response = call.execute();
+        log.info("Successfully called Ping endpoint. Response: {}", response.body());
+    }
+
+    @SneakyThrows(IOException.class)
+    public void getCoinDetails(String ids) {
+        Call<Map<String, GetCoinResponse.CoinData>> call = coinGeckoApiClient.getCoinDetails(apiKey, ids, "usd", true, true, true, true, "full");
+        var response = call.execute();
+        log.info("Successfully Called Coin Details endpoint for {} coin(s). Response: {}", ids, response.body());
+    }
 }
