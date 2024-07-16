@@ -32,6 +32,7 @@
       <artifactId>slf4j-api</artifactId>
       <version>1.7.32</version>
     </dependency>
+
     <!-- Logback implementation -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -54,11 +55,21 @@
       <version>4.2.0</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok-maven-plugin</artifactId>
       <version>1.18.20.0</version>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- jUnit -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.10.3</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

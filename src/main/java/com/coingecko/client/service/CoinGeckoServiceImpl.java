@@ -18,7 +18,6 @@ public class CoinGeckoServiceImpl {
         this.apiKey = Config.get("api_key");
     }
 
-    // Asynchronous method with callback
     public void pingAsync(CoinGeckoCallback callback) {
         Call<PingResponse> call = coinGeckoService.ping(apiKey);
         call.enqueue(new Callback<PingResponse>() {
@@ -26,15 +25,15 @@ public class CoinGeckoServiceImpl {
             public void onResponse(Call<PingResponse> call, Response<PingResponse> response) {
                 if (response.isSuccessful()) {
                     PingResponse pingResponse = response.body();
-                    callback.onPingSuccess("Response: " + pingResponse);
+                    callback.onPingSuccess(pingResponse.toString());
                 } else {
-                    callback.onPingFailure("Ping failed: " + response.message());
+                    callback.onPingFailure(response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<PingResponse> call, Throwable t) {
-                callback.onPingFailure("Ping failed: " + t.getMessage());
+                callback.onPingFailure(t.getMessage());
             }
         });
     }

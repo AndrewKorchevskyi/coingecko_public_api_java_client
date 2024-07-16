@@ -16,13 +16,13 @@ public class CoinGeckoServiceManager implements CoinGeckoCallback {
 
     @Override
     public void onPingSuccess(String message) {
-        log.info(message);
+        log.info("Ping success: {}", message);
         terminate();
     }
 
     @Override
     public void onPingFailure(String message) {
-        log.info(message);
+        log.info("Ping failure: {}", message);
         terminate();
     }
 
